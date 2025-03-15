@@ -1,214 +1,163 @@
-The Event Management System is a full-stack application designed to manage events, bookings, categories, and users. It is built using a combination of modern technologies including TypeScript for the frontend and Spring Boot for the backend. The application supports both administrative and customer functionalities.
+# Event Management System
+
+A comprehensive event management platform built with Next.js for the frontend and Spring Boot for the backend. This system allows users to browse events, make bookings, and provides administrators with tools to manage events, categories, and users.
+
+## Features
+
+### Customer Features
+- Browse events with search and filter capabilities
+- View event details including venue, time, and ticket availability
+- Register and login to user accounts
+- Book tickets for events
+- View booking history
+
+### Admin Features
+- Manage event categories (add, edit, delete)
+- Create and manage events
+- View all bookings
+- View customer information
+- Register new admin users
+
+## Tech Stack
+
+### Frontend
+- **Next.js 14** - React framework with server-side rendering
+- **TypeScript** - Type-safe JavaScript
+- **Tailwind CSS** - Utility-first CSS framework
+- **Shadcn UI** - Component library
+- **Framer Motion** - Animation library
+- **Context API** - State management
+
+### Backend
+- **Spring Boot** - Java-based backend framework
+- **Spring Security** - Authentication and authorization
+- **JPA/Hibernate** - ORM for database operations
+- **JWT** - Token-based authentication
+
+## Project Structure
+
+### Frontend
+```
+frontend/
+├── src/
+│   ├── app/                  # Next.js pages and layouts
+│   │   ├── admin/            # Admin-specific pages
+│   │   ├── customer/         # Customer-specific pages
+│   │   ├── layout.tsx        # Root layout with providers
+│   │   └── page.tsx          # Home page
+│   ├── components/           # Reusable UI components
+│   │   ├── ui/               # Base UI components
+│   │   ├── Header.tsx        # Navigation header
+│   │   ├── Footer.tsx        # Page footer
+│   │   └── ...
+│   └── contexts/             # React context providers
+│       ├── AuthContext.tsx   # Authentication state
+│       ├── EventContext.tsx  # Event management
+│       └── ...
+```
+
+### Backend
+```
+src/main/java/com/eventmanagement/eventmanagementsystem/
+├── config/                   # Configuration classes
+├── controller/               # REST API endpoints
+├── dto/                      # Data transfer objects
+├── model/                    # Entity classes
+├── repository/               # Data access layer
+├── security/                 # Security configuration
+└── service/                  # Business logic
+```
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18+)
+- Java JDK 17+
+- Maven
+- MySQL or PostgreSQL
+
+### Frontend Setup
+1. Navigate to the frontend directory:
+   ```
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Run the development server:
+   ```
+   npm run dev
+   ```
+
+4. Access the application at http://localhost:3000
+
+### Backend Setup
+1. Configure database connection in `application.properties`
+
+2. Build the application:
+   ```
+   mvn clean install
+   ```
 
-Folder Structure :
+3. Run the application:
+   ```
+   mvn spring-boot:run
+   ```
 
-Root Directory
+4. The API will be available at http://localhost:8080
 
-frontend: Contains the TypeScript frontend application.
+## User Flows
 
-gradle: Contains Gradle build files for the project.
+### Customer Flow
+1. Browse events on the homepage
+2. Register/login to create an account
+3. Select an event and purchase tickets
+4. View booking history in the customer dashboard
 
-src: Contains the backend Java files for the Spring Boot application.
+### Admin Flow
+1. Login with admin credentials
+2. Manage categories and events
+3. View all bookings and customer information
+4. Register new admin users if needed
 
-Frontend
+## Authentication
 
-Located in the frontend folder:
+The system uses JWT-based authentication:
+- Tokens are generated upon successful login
+- Protected routes require valid tokens
+- Different permissions for admin and customer roles
 
-public
+## Data Models
 
-Contains static assets such as images, favicon, etc.
+### User
+- Personal information (name, email, contact)
+- Authentication details (password)
+- Role (admin/customer)
 
-src
+### Event
+- Event details (title, description, venue)
+- Ticket information (price, availability)
+- Scheduling (start/end time)
 
-Contains the source code for the TypeScript application.
+### Booking
+- Event reference
+- Customer information
+- Ticket quantity and total price
 
-app
+### Category
+- Title and description for event categorization
 
-admin: Contains administrative pages such as bookings, categories, customers, and events.
+## Future Enhancements
 
-bookings/page.tsx: Manages booking-related functionalities.
+- Payment gateway integration
+- Email notifications
+- Event reviews and ratings
+- Advanced search and filtering
+- Mobile application
 
-categories/page.tsx: Manages category-related functionalities.
+## License
 
-category/page.tsx: Handles specific category details.
-
-customers/page.tsx: Manages customer-related functionalities.
-
-event/page.tsx: Handles individual event details.
-
-events/page.tsx: Manages all events.
-
-register/page.tsx: Handles admin registration.
-
-customer: Contains customer-specific pages.
-
-bookings/page.tsx: Manages customer bookings.
-
-globals.css: Contains global CSS styles.
-
-layout.tsx: Defines the layout for the application.
-
-page.tsx: Main entry page for the application.
-
-components
-
-ui: Contains reusable UI components.
-
-AuthModal.tsx: Authentication modal.
-
-EventList.tsx: Event listing component.
-
-EventSearch.tsx: Event search component.
-
-Footer.tsx: Footer component.
-
-Header.tsx: Header component.
-
-contexts
-
-AuthContext.tsx: Context for authentication.
-
-BookingContext.tsx: Context for booking management.
-
-CategoryContext.tsx: Context for category management.
-
-CustomerContext.tsx: Context for customer-related data.
-
-EventContext.tsx: Context for event management.
-
-lib
-
-utils.ts: Utility functions for the frontend.
-
-Backend
-
-Located in the src folder:
-
-libs
-
-mysql-connector-j-8.4.0.jar: MySQL connector for database integration.
-
-main
-
-java
-
-com.eventmanagement.eventmanagementsystem
-
-config
-
-SecurityConfig.java: Configures application security.
-
-controller
-
-AuthController.java: Handles authentication endpoints.
-
-BookingController.java: Manages booking-related endpoints.
-
-CategoryController.java: Handles category management endpoints.
-
-EventController.java: Manages event-related endpoints.
-
-dto
-
-LoginRequest.java: Data transfer object for login requests.
-
-model
-
-Booking.java: Entity for booking.
-
-Category.java: Entity for category.
-
-Event.java: Entity for event.
-
-User.java: Entity for user.
-
-repository
-
-BookingRepository.java: Repository for bookings.
-
-CategoryRepository.java: Repository for categories.
-
-EventRepository.java: Repository for events.
-
-UserRepository.java: Repository for users.
-
-service
-
-EventManagementService.java: Service layer for business logic.
-
-EventManagementSystemApplication.java: Main application class.
-
-resources
-Contains application configuration files.
-
-test
-
-Contains test files for the backend application.
-
-How to Run
-
-Prerequisites
-
-Node.js and npm (for the frontend)
-
-Java 11 or higher (for the backend)
-
-MySQL (for the database)
-
-Gradle (for backend build management)
-
-Frontend
-
-Navigate to the frontend directory.
-
-Install dependencies:
-
-npm install
-
-Start the development server:
-
-npm start
-
-Backend
-
-Navigate to the src directory.
-
-Build the application using Gradle:
-
-gradle build
-
-Run the application:
-
-java -jar build/libs/event-management-system-0.0.1-SNAPSHOT.jar
-
-Database Setup
-
-Ensure MySQL is running.
-
-Create a database named event_management.
-
-Configure database connection in application.properties (located in src/main/resources).
-
-Features
-
-Admin Panel: Manage events, categories, bookings, and customers.
-
-Customer Interface: View and book events.
-
-Authentication: Secure login for admin and customers.
-
-Event Search: Search and filter events easily.
-
-Responsive UI: User-friendly interface designed for various devices.
-
-Technologies Used
-
-Frontend: TypeScript, CSS
-
-Backend: Spring Boot
-
-Database: MySQL
-
-Build Tools: Gradle
-
-
+This project is licensed under the MIT License - see the LICENSE file for details.
